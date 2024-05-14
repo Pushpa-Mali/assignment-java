@@ -145,20 +145,20 @@ public class UserService {
 
         if (isBulkUpdate) {
             // Handle bulk update
-//            for (String userId : requestDTO.getUser_ids()) {
-//                for (Map<String, String> updateData : requestDTO.getUpdate_data()) {
-//                    // Process each update data set
-//                     Messages.append(processUpdate(userId, updateData)+" for "+userId+" ");
-//                }
-//            }
+           for (String userId : requestDTO.getUser_ids()) {
+               for (Map<String, String> updateData : requestDTO.getUpdate_data()) {
+                   // Process each update data set
+                    Messages.append(processUpdate(userId, updateData)+" for "+userId+" ");
+               }
+           }
 
 
-                for (Map<String, String> updateData : requestDTO.getUpdate_data()) {
-                    for (String userId : requestDTO.getUser_ids()) {
-                    // Process each update data set
+                // for (Map<String, String> updateData : requestDTO.getUpdate_data()) {
+                //     for (String userId : requestDTO.getUser_ids()) {
+                //     // Process each update data set
 
-                     Messages.append(processUpdate(userId, updateData)+" for "+userId+" ");
-                }
+                //      Messages.append(processUpdate(userId, updateData)+" for "+userId+" ");
+                // }
             }
 
         }
