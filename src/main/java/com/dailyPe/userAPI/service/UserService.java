@@ -159,7 +159,7 @@ public class UserService {
 
                 //      Messages.append(processUpdate(userId, updateData)+" for "+userId+" ");
                 // }
-            }
+           // }
 
         }
         else {
