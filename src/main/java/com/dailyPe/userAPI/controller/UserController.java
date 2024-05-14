@@ -2,6 +2,7 @@ package com.dailyPe.userAPI.controller;
 
 import com.dailyPe.userAPI.dto.DeleteUserRequest;
 import com.dailyPe.userAPI.dto.GetUserRequest;
+import com.dailyPe.userAPI.dto.UpdateUserRequest;
 import com.dailyPe.userAPI.dto.UserDTO;
 import com.dailyPe.userAPI.entity.User;
 import com.dailyPe.userAPI.service.UserService;
@@ -30,13 +31,35 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping("/update_user")
+    public ResponseEntity<StringBuilder> updateUser(@RequestBody UpdateUserRequest request) {
+
+            StringBuilder response = userService.updateUser(request);
+            String resp=response.toString();
+            if(resp.startsWith("Invalid")){
+                return ResponseEntity.badRequest().body(response);
+             }
+                return ResponseEntity.ok(response);
+
+    }
+
     @PostMapping("/get_users")
-    public ResponseEntity<List<User>> getUsers(@RequestBody Optional<GetUserRequest> getUserRequest) {
+    public ResponseEntity<?> getUsers(@RequestBody Optional<GetUserRequest> getUserRequest) {
         if(getUserRequest.isPresent()) {
+            if(getUserRequest.get().getUser_id() != null){
+                User user = userService.getUser(getUserRequest.get());
+                if(user!=null){
+                return ResponseEntity.ok().body(user);}
+                else{
+                    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+                }
+            }
             List<User> users = userService.getUsers(getUserRequest.get());
             if (!users.isEmpty()) {
                 return ResponseEntity.ok().body(users);
-            } else {
+            }
+
+            else {
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
             }
         }

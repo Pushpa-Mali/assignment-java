@@ -13,11 +13,13 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
     List<User> findByMobileNumber(String mobNum);
 
-    List<User> findByUserId(UUID userId);
+    User findByUserId(UUID userId);
 
     List<User> findByManagerId(UUID managerId);
 
     int deleteByUserId(UUID userId);
 
     int deleteByMobileNumber(String mobNum);
+
+//    User findByUserId(UUID userId);
 }
